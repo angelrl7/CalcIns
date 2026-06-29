@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\Trabajos\\\\CalcIns\\\\public\\\\icons\")",
+      "Read(//c/Users/Usuario/.claude/projects/c--Trabajos-CalcIns/memory/**)"
+    ]
+  }
+}

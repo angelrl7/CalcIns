@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: applies dark: variants when .dark is on any ancestor */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Safe-area insets for notched phones */
 .pt-safe-top {
   padding-top: max(0.75rem, env(safe-area-inset-top));

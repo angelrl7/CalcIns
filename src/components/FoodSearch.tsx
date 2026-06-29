@@ -67,25 +67,27 @@ export function FoodSearch({ onChange }: Props) {
           onFocus={() => setShowResults(true)}
           onBlur={() => setTimeout(() => setShowResults(false), 150)}
           placeholder="Buscá un alimento..."
-          className="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-slate-800 text-sm
+          className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2.5
+                     text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-700 text-sm
                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                     placeholder:text-slate-300"
+                     placeholder:text-slate-300 dark:placeholder:text-slate-500"
         />
         {showResults && results.length > 0 && (
-          <div className="absolute z-20 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 overflow-hidden">
+          <div className="absolute z-20 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg mt-1 overflow-hidden">
             {results.map(food => (
               <button
                 key={food.id}
                 type="button"
                 onMouseDown={() => addFood(food)}
                 className="w-full px-3 py-2.5 text-left flex items-center justify-between gap-2
-                           hover:bg-slate-50 border-b border-slate-100 last:border-0"
+                           hover:bg-slate-50 dark:hover:bg-slate-700
+                           border-b border-slate-100 dark:border-slate-700 last:border-0"
               >
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-slate-800 truncate">{food.name}</p>
-                  <p className="text-xs text-slate-400">{food.portionLabel}</p>
+                  <p className="text-sm font-medium text-slate-800 dark:text-slate-100 truncate">{food.name}</p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">{food.portionLabel}</p>
                 </div>
-                <span className="text-xs font-semibold text-blue-700 shrink-0">
+                <span className="text-xs font-semibold text-blue-700 dark:text-blue-400 shrink-0">
                   {food.carbsPerPortion}g CHO
                 </span>
               </button>
@@ -93,8 +95,8 @@ export function FoodSearch({ onChange }: Props) {
           </div>
         )}
         {showResults && query.trim().length > 0 && results.length === 0 && (
-          <div className="absolute z-20 w-full bg-white border border-slate-200 rounded-lg shadow-lg mt-1 px-3 py-3">
-            <p className="text-sm text-slate-400">Sin resultados para "{query}"</p>
+          <div className="absolute z-20 w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg mt-1 px-3 py-3">
+            <p className="text-sm text-slate-400 dark:text-slate-500">Sin resultados para "{query}"</p>
           </div>
         )}
       </div>
@@ -105,11 +107,11 @@ export function FoodSearch({ onChange }: Props) {
           {selected.map(({ food, portions }) => (
             <div
               key={food.id}
-              className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2"
+              className="flex items-center gap-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2"
             >
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-slate-800 truncate">{food.name}</p>
-                <p className="text-xs text-slate-500">{food.portionLabel}</p>
+                <p className="text-sm font-medium text-slate-800 dark:text-slate-100 truncate">{food.name}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{food.portionLabel}</p>
               </div>
 
               {/* Portions counter */}
@@ -117,32 +119,32 @@ export function FoodSearch({ onChange }: Props) {
                 <button
                   type="button"
                   onClick={() => changePortions(food.id, -1)}
-                  className="w-7 h-7 rounded-md bg-white border border-slate-300 text-slate-600
-                             font-bold text-base flex items-center justify-center
-                             hover:bg-slate-100 active:bg-slate-200"
+                  className="w-7 h-7 rounded-md bg-white dark:bg-slate-600 border border-slate-300 dark:border-slate-500
+                             text-slate-600 dark:text-slate-200 font-bold text-base flex items-center justify-center
+                             hover:bg-slate-100 dark:hover:bg-slate-500 active:bg-slate-200 dark:active:bg-slate-400"
                 >
                   −
                 </button>
-                <span className="text-sm font-mono w-5 text-center text-slate-800">{portions}</span>
+                <span className="text-sm font-mono w-5 text-center text-slate-800 dark:text-slate-100">{portions}</span>
                 <button
                   type="button"
                   onClick={() => changePortions(food.id, +1)}
-                  className="w-7 h-7 rounded-md bg-white border border-slate-300 text-slate-600
-                             font-bold text-base flex items-center justify-center
-                             hover:bg-slate-100 active:bg-slate-200"
+                  className="w-7 h-7 rounded-md bg-white dark:bg-slate-600 border border-slate-300 dark:border-slate-500
+                             text-slate-600 dark:text-slate-200 font-bold text-base flex items-center justify-center
+                             hover:bg-slate-100 dark:hover:bg-slate-500 active:bg-slate-200 dark:active:bg-slate-400"
                 >
                   +
                 </button>
               </div>
 
-              <span className="text-sm font-semibold text-blue-700 w-12 text-right shrink-0">
+              <span className="text-sm font-semibold text-blue-700 dark:text-blue-400 w-12 text-right shrink-0">
                 {food.carbsPerPortion * portions}g
               </span>
 
               <button
                 type="button"
                 onClick={() => removeFood(food.id)}
-                className="text-slate-300 hover:text-red-400 text-lg leading-none ml-1 shrink-0"
+                className="text-slate-300 dark:text-slate-500 hover:text-red-400 dark:hover:text-red-400 text-lg leading-none ml-1 shrink-0"
                 aria-label="Eliminar"
               >
                 ×

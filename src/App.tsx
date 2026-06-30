@@ -60,6 +60,19 @@ export default function App() {
     setRegistered(false)
   }, [params, input])
 
+  const handleAIEstimated = useCallback((carbs: number): BolusResult | null => {
+    const newInput = { ...input, carbohidratos: carbs }
+    if (!isComplete(params)) {
+      setResult({ type: 'missing_params' })
+      return { type: 'missing_params' }
+    }
+    if (!newInput.insulinId) return null
+    const r = calcularBolo(params, { insulinId: newInput.insulinId, carbohidratos: carbs })
+    setResult(r)
+    setRegistered(false)
+    return r
+  }, [params, input])
+
   function handleRegister(r: BolusResultOk) {
     if (!isCompleteInput(input)) return
     const entry = addHistoryEntry({
@@ -141,7 +154,7 @@ export default function App() {
         {tab === 'calc' ? (
           <>
             <ParametersPanel params={params} onChange={setParams} />
-            <CalculatorForm input={input} onChange={setInput} />
+            <CalculatorForm input={input} onChange={setInput} onAIEstimated={handleAIEstimated} />
 
             <button
               type="button"

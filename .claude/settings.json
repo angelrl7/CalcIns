@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\Trabajos\\\\CalcIns\\\\public\\\\icons\")",
-      "Read(//c/Users/Usuario/.claude/projects/c--Trabajos-CalcIns/memory/**)"
+      "Read(//c/Users/Usuario/.claude/projects/c--Trabajos-CalcIns/memory/**)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(curl -s http://localhost:5173)"
     ]
   }
 }

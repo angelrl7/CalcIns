@@ -1,16 +1,17 @@
 import { type ChangeEvent } from 'react'
-import { INSULIN_CATALOGUE, type BolusInput } from '../lib/bolus'
-import { FoodSearch } from './FoodSearch'
+import { INSULIN_CATALOGUE, type BolusInput, type BolusResult } from '../lib/bolus'
+import { AIFoodInput } from './AIFoodInput'
 
 interface Props {
   input: Partial<BolusInput>
   onChange: (i: Partial<BolusInput>) => void
+  onAIEstimated?: (carbs: number) => BolusResult | null
 }
 
-export function CalculatorForm({ input, onChange }: Props) {
+export function CalculatorForm({ input, onChange, onAIEstimated }: Props) {
   return (
     <section className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm px-4 py-4 space-y-4">
-      <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100">Datos del bolo</h2>
+      <h2 className="text-base font-semibold text-slate-800 dark:text-slate-100">¿Qué vas a comer?</h2>
 
       {/* Insulin selector */}
       <div>
@@ -30,14 +31,16 @@ export function CalculatorForm({ input, onChange }: Props) {
         </select>
       </div>
 
-      {/* Food search */}
+      {/* AI food description */}
       <div>
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">
-          ¿Qué comiste?
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
+          Contale a la IA lo que comiste
         </label>
-        <FoodSearch
-          onChange={(carbs) => onChange({ ...input, carbohidratos: carbs })}
+        <AIFoodInput
+          onCarbs={(carbs) => onChange({ ...input, carbohidratos: carbs })}
+          onEstimated={onAIEstimated}
         />
+
       </div>
     </section>
   )

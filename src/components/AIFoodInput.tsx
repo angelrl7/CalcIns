@@ -120,7 +120,7 @@ export function AIFoodInput({ onCarbs, onEstimated }: Props) {
           </div>
 
           {/* Insulin dose */}
-          {doseResult?.type === 'ok' && (
+          {doseResult?.type === 'ok' && isFinite(doseResult.dosisFinal) && (
             <div className={`rounded-xl px-4 py-5 ${doseResult.alertaTope ? 'bg-amber-500' : 'bg-blue-950'} text-white`}>
               {doseResult.alertaTope && (
                 <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
